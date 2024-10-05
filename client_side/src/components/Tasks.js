@@ -66,7 +66,7 @@ useEffect(()=>{
                         <input type='checkbox' className='w-4 h-4 cursor-pointer'/>
                         <label>{val.title}</label>
                       </div>
-                      <div className='select-none'>ora</div>
+                      <div className='select-none'>{val.time}</div>
                     </li>
                   )}
                   

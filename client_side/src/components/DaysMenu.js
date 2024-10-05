@@ -3,9 +3,8 @@ import Cookies from "universal-cookie";
 function DaysMenu() {
   
   const [dayData,setDayData] = useState({});
-  const [differenceBetweenDays,setDifferenceBetweenDays] = useState(0);
+  const [differenceBetweenDays,setDifferenceBetweenDays] = useState(1);
   const cookies = new Cookies();
-  
   const a = async(link)=>{
     const resp = await fetch(link,{method:'GET',headers:{Accept: 'application/json','Content-Type': 'application/json'}});
     const data = await resp.json();
@@ -13,15 +12,10 @@ function DaysMenu() {
   }
   useEffect(()=>{
     try{
-      if(differenceBetweenDays===0){
-        a('http://localhost:3001/time');
-      }
-      else{
-        var day = new Date();
-        day.setDate(day.getUTCDate()+differenceBetweenDays)
-        console.log(day)
-        a(`http://localhost:3001/anyDay?day=${day}`);
-      }
+      var day = new Date();
+      day.setDate(day.getUTCDate()+differenceBetweenDays)
+      a(`http://localhost:3001/anyDay?day=${day}`);
+      
     }catch(err){
       console.log(err);
     }

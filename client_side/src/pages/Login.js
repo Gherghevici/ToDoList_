@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
-const Login = ()=>{
+const Login = ({changeLoginState})=>{
     const [isLogin,setIsLogin] = useState(true);
     const cookies = new Cookies();
     const navigate = useNavigate();
@@ -35,9 +35,12 @@ const Login = ()=>{
                     },
                     body: JSON.stringify(data)
                 }).then(response => {
-                        if(response.status===200)
-                            navigate('/dashboard')
-                        response.json().then((res)=>{cookies.set("access_token",res.token); cookies.set("displayName",res.user.displayName);cookies.set("uid",res.user.uid)})
+                        if(response.status===200){
+                            response.json().then((res)=>{cookies.set("access_token",res.token); cookies.set("displayName",res.user.displayName);cookies.set("uid",res.user.uid)})
+                            
+                            navigate('/loading')
+                            changeLoginState(true);
+                        }
                         
                     })
                     .catch(error =>{

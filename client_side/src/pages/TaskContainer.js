@@ -3,8 +3,8 @@ import DaysMenu from '../components/DaysMenu'
 import TaskContainerFooter from '../components/TaskContainerFooter'
 import Tasks from '../components/Tasks'
 import ModalTasks from '../components/ModalTasks';
-
-function TaskContainer() {
+import { Navigate } from 'react-router-dom';
+function TaskContainer({isLoggedIn}) {
     const [isOpen,setIsOpen] = useState(false);
     const [dataTask,setDataTask] = useState([]);
     
@@ -15,6 +15,8 @@ function TaskContainer() {
         setIsOpen((prev)=>prev=!isOpen);
     }
   
+    if(!isLoggedIn)
+        return <Navigate to='/login'/>
     return (
     <>  
         <div>

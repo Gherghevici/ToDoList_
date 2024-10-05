@@ -4,8 +4,7 @@ const { admin } = require("./config");
 const verifyToken = async (req, res, next) => {
     const authHeader = req.headers.authorization;
     const idToken = authHeader.split(' ')[2];
-    
-    if (!idToken) {
+    if (idToken==="undefined") {
         return res.status(403).json({ error: 'No token provided' });
     }
 

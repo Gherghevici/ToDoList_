@@ -176,18 +176,18 @@ app.get('/anyDay',async(req,res)=>{
 
 
 
-app.get('/time',async(req,res)=>{
-    const days = ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
-    const month= ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    const time = new Date();
-    const day=dayStringCalculation(time.getDate())
-    const resp =  {
-        day:`${days[time.getDay()]}`,
-        month:`${month[time.getMonth()]}`,
-        dayNumber:day,
-        fullDay:`${time.getFullYear()}-${time.getMonth()}-${time.getDate()}`
-    }
-    res.send(resp);
-})
-
+// app.get('/time',async(req,res)=>{
+//     const days = ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
+//     const month= ["January","February","March","April","May","June","July","August","September","October","November","December"];
+//     const time = new Date();
+//     const day=dayStringCalculation(time.getDate())
+//     const resp =  {
+//         day:`${days[time.getDay()]}`,
+//         month:`${month[time.getMonth()]}`,
+//         dayNumber:day,
+//         fullDay:`${time.getFullYear()}-${time.getMonth()}-${time.getDate()}`
+//     }
+//     res.send(resp);
+// })
+//////////nuj daca imi mai trebuie ^
 app.listen(PORT,()=>console.log("merge"))
