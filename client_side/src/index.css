@@ -8,3 +8,7 @@ body {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
 }
 
+.custom_shadow{
+  box-shadow: 0 0 5px 2px ;
+}
+
