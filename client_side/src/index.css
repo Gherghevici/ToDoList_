@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
+:root{
+  --bg-gray-300:rgb(209 213 219);
+}
 body {
   margin: 0; 
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
@@ -10,5 +12,11 @@ body {
 
 .custom_shadow{
   box-shadow: 0 0 5px 2px ;
+}
+.custom_shadow_gray{
+  box-shadow: 0 0 5px 2px var(--bg-gray-300);
+}
+.ellipse{
+  clip-path: ellipse(50% 90% at bottom center);
 }
 
