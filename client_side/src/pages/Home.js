@@ -47,28 +47,28 @@ const Home = ()=>{
                             <p className="w-12 h-12 z-10 text-white text-xl font-semibold bg-indigo-500 rounded-full flex justify-center items-center relative after:content-[''] after:h-12 after:w-1 after:absolute after:top-full after:border-l-2 after:border-indigo-400 after:border-dashed after:left-1/2 ">1</p>
                             <div>
                                 <h3 className="text-2xl font-semibold">Create an account</h3>
-                                <p className="text-black/80">lalalalal</p>
+                                <p className="text-black/80">Join us today and simplify your tasks effortlessly. Create an account to get started!</p>
                             </div>
                         </div>
                         <div className="flex gap-5">
                             <p className="w-12 h-12 z-10 text-white text-xl font-semibold bg-indigo-500 rounded-full flex justify-center items-center relative after:content-[''] after:h-12 after:w-1 after:absolute after:top-full after:border-l-2 after:border-indigo-400 after:border-dashed after:left-1/2 ">2</p>
                             <div>
                                 <h3 className="text-2xl font-semibold">Add your tasks</h3>
-                                <p className="text-black/80">lalalalal</p>
+                                <p className="text-black/80">Add your tasks and stay organized. Start managing everything in one place!</p>
                             </div>
                         </div>
                         <div className="flex gap-5">
                             <p className="w-12 h-12 z-10 text-xl font-semibold text-white bg-indigo-500 rounded-full flex justify-center items-center relative after:content-[''] after:h-12 after:w-1 after:absolute after:top-full after:border-l-2 after:border-indigo-400 after:border-dashed after:left-1/2 ">3</p>
                             <div>
                                 <h3 className="text-2xl font-semibold">Complet or modify them</h3>
-                                <p className="text-black/80">lalalalal</p>
+                                <p className="text-black/80">Complete or modify your tasks anytime to stay on top of your progress!</p>
                             </div>
                         </div>
                         <div className="flex gap-5">
                             <p className="w-12 h-12 text-white text-xl font-semibold bg-indigo-500 rounded-full z-10  flex justify-center items-center">4</p>
                             <div>
-                                <h3 className="text-2xl font-semibold">Create an account</h3>
-                                <p className="text-black/80">lalalalal</p>
+                                <h3 className="text-2xl font-semibold">Achieve your goals</h3>
+                                <p className="text-black/80">Achieve your goals with ease. Stay organized, track your progress, and make every task count!</p>
                             </div>
                         </div>
                         <div className="flex gap-5">
@@ -79,10 +79,10 @@ const Home = ()=>{
                     
                 </aside>
             </section>
-            <section className="px-16 py-10 flex">
+            <section className="px-16 py-10 flex" id="about">
                 <aside className="w-1/2">
                     <h2 className="text-4xl font-bold">About <span className="text-indigo-500">Us</span></h2>
-                    <p className="text-black/80">lalalalla</p>
+                    <p className="text-black/80">We created this app to simplify everyday task management for users like you. With a focus on usability and efficiency, We designed this tool to help you organize, prioritize, and achieve your goals effortlessly. Our commitment to continuous improvement drives us to enhance your experience, making this app a reliable companion in your daily routine.</p>
                     <button className="w-32 h-8 bg-indigo-500 rounded-lg text-white font-bold shadow-lg shadow-indigo-300">Read More</button>
                 </aside>
                 <aside className="w-1/2">
@@ -98,7 +98,7 @@ const Home = ()=>{
                     <button><FaAngleRight /></button>
                 </aside>
             </section>
-            <footer className="bg-indigo-100/50 pt-10 relative">
+            <footer className="bg-indigo-100/50 pt-10 relative" id="contact">
                 <div className="bg-indigo-500 flex justify-between items-center w-9/12  px-10 py-4 rounded-lg absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     <h2 className="text-white font-bold text-3xl ">Redy to get started?</h2>
                     <button className="border-2 border-white text-white w-32 h-8 rounded-lg ">Contact Us</button>
