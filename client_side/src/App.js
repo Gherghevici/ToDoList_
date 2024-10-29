@@ -14,7 +14,7 @@ function App() {
   
   return (
     <BrowserRouter >
-      <Header changeLoginState={changeLoginState}/>
+      <Header changeLoginState={changeLoginState} isLoggedIn={isLoggedIn}/>
       
       <Routes>
         <Route path='/' element={<Home/>}/>

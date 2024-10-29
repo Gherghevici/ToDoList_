@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import Cookies from "universal-cookie";
 import { Link } from "react-scroll";
-import { Navigate } from "react-router-dom";
-const Header = ({changeLoginState})=>{
+import { useNavigate } from "react-router-dom";
+const Header = ({changeLoginState,isLoggedIn})=>{
+
     const [nameGlow,setNameGlow] = useState("Home");
     const cookie = new Cookies();
+    const navigate = useNavigate();
+
+    const loginHandler = ()=>{
+        navigate("/login");
+    }
     const logoutHandler = ()=>{
         cookie.remove('access_token');
         cookie.remove('date');
         cookie.remove('displayName');
         cookie.remove('uid');
-        changeLoginState(false);    
+        changeLoginState(false);
+        navigate("/");
     }
     console.log("da")
     const handleGlowNavName = (name,e)=>{
@@ -37,8 +44,12 @@ const Header = ({changeLoginState})=>{
                 <Link to="contact" smooth={true} duration={500} className={`cursor-pointer hover:text-indigo-500 ${nameGlow==="Contact"?"text-indigo-500":""}`} onClick={(e)=>handleGlowNavName("Contact",e)}>Contact</Link>
 
             </div>
-            
-            <button onClick={logoutHandler} className=" place-items-center place-self-end px-2 py-1 border-2 border-indigo-400 active:focus:border-indigo-300 rounded-lg ">Log out</button>
+            {
+                isLoggedIn?
+                <button onClick={logoutHandler} className=" place-items-center place-self-end px-2 py-1 border-2 border-indigo-400 active:focus:border-indigo-300 rounded-lg ">Log out</button>
+                :
+                <button onClick={loginHandler} className=" place-items-center place-self-end px-2 py-1 border-2 border-indigo-400 active:focus:border-indigo-300 rounded-lg ">Login</button>
+            }
 
            
 
