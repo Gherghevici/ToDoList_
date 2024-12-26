@@ -6,6 +6,7 @@ const ModalTasks = ({setData,isOpen,openModal})=>{
     const [imp,setImp] = useState(1)
     const cookies = new Cookies();
     const uid = cookies.get("uid");
+    const date = cookies.get("date");
     const [token,] = useState(cookies.get("access_token"))
     const impClickHandler = (e,val)=>{
        e.preventDefault();
@@ -48,27 +49,19 @@ const ModalTasks = ({setData,isOpen,openModal})=>{
             time:"",
             isComplete:false,
             importance:1,
+            id:uid
         }
     });
-    const modifyDataDateMonth = (val)=>{
-        if(val===""||undefined)
-            return ""
-        const dataSpliceArr = val.split("-");
-        const month = Number(dataSpliceArr[1])-1;
-        const day=Number(dataSpliceArr[2]);
-
-        return `${dataSpliceArr[0]}-${month}-${day}`;
-    }
+    
     return(   
-        <div className={`absolute  w-3/5 p-2 transition-all duration-500 border-l-2 border-indigo-200 text-indigo-400 text-lg ${isOpen?"right-0 top-0":" right-0 -top-full"} `}>
+        <div className={`absolute  w-3/5 p-2 pt-16 transition-all duration-500 border-l-2 border-indigo-200 text-indigo-400 text-lg ${isOpen?"right-0 top-0":" right-0 -top-full"} `}>
             <div className="flex justify-between ">
                 <h2 className="mx-auto">Add new Task</h2>
                 <button onClick={openModal} className="mr-2 active:text-indigo-300/80">x</button>
             </div>
             <form onSubmit={handleSubmit((data)=>{
-                console.log(data);
-                data.date=modifyDataDateMonth(data.date);
-                
+                if(data.date==="")
+                    data.date=date;
                 fetch('http://localhost:3001/data',{
                     method: 'POST',
                     headers: {
@@ -99,8 +92,8 @@ const ModalTasks = ({setData,isOpen,openModal})=>{
                 <div>
                     <div className="flex gap-2">
                         <h3>Select Date and Time: </h3>
-                        <input type="date" autoComplete="" {...register("date")} className="focus:outline-none "/>
-                        <input type="time" autoComplete="" {...register("time")} />
+                        <input type="date"  {...register("date")} className="focus:outline-none "/>
+                        <input type="time"  {...register("time")} />
                     </div>
                 </div>
                 <div className="flex flex-col gap-2">

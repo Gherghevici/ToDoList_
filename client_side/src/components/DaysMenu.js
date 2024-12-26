@@ -13,7 +13,7 @@ function DaysMenu() {
   useEffect(()=>{
     try{
       var day = new Date();
-      day.setDate(day.getUTCDate()+differenceBetweenDays)
+      day.setDate(day.getUTCDate()+differenceBetweenDays-1)
       a(`http://localhost:3001/anyDay?day=${day}`);
       
     }catch(err){

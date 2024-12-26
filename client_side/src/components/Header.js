@@ -48,7 +48,7 @@ const Header = ({changeLoginState,isLoggedIn})=>{
     }
 
     return(
-        <header className="grid grid-cols-3 sm:grid-cols-[15%_70%_15%]  border-b-2 border-gray-300 bg-white/60 px-4 py-2 fixed w-full ">
+        <header className="grid grid-cols-3 sm:grid-cols-[15%_70%_15%]  border-b-2 bg-white z-50 border-gray-300 bg-white/60 px-4 py-2 fixed w-full ">
             <div className="order-2 sm:order-none grid grid-cols-1 place-content-center ">
                 <img src="" alt="LOGO" onClick={()=>navigate("/")} className="cursor-pointer"></img>
             </div>

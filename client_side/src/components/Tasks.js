@@ -1,16 +1,18 @@
 import {React,useEffect,useState} from 'react'
 import { DragDropContext,Droppable,Draggable } from 'react-beautiful-dnd'
 import Cookies from "universal-cookie";
+
 function Tasks({data,setData}) {
   
 
 const cookies = new Cookies();
+const [testData,setTestData] = useState(data);
 const [id,setId]=useState(cookies.get("uid"));
 const [day,setDay] = useState(cookies.get("date"));
 const [token,] = useState(cookies.get("access_token"))
   
-useEffect(()=>{
-  fetch(`http://localhost:3001/data?day=${day}`,{
+const fetchDataByDay = async (day)=>{
+  const resp = await fetch(`http://localhost:3001/data?day=${day}`,{
     method: 'GET',
     headers: {
         Accept: 'application/json',
@@ -18,13 +20,30 @@ useEffect(()=>{
                 'Authorization': `Bearer ${id} ${token}`,
                 
         },
-  }).then(response => {
-        response.json().then((res)=>setData(res.data))
-    })
-    .catch(error =>{
-        console.log(error)
-    })
-    console.log(data);
+  })
+  const jsonResp = await resp.json();
+  setData(jsonResp.data);
+}
+const updateCompletedTask = async(taskID,e)=>{
+  const resp = await fetch(`http://localhost:3001/data?docID=${taskID}`,{
+    method: 'PATCH',
+    headers: {
+        Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${id} ${token}`,
+                
+        },
+  })
+  const jsonResp = await resp.json();
+  console.log(jsonResp);
+    testData.forEach(val => {
+      if(val.taskID===taskID)
+        val.isComplete=jsonResp.data.isComplete;
+    });
+    setData(testData);
+}
+useEffect(()=>{
+  fetchDataByDay(day);
 },[day])
 
 useEffect(()=>{
@@ -63,7 +82,7 @@ useEffect(()=>{
                     <li  className='flex justify-between items-center py-2 px-4 select-none ' {...prov.draggableProps}  ref={prov.innerRef}>
                       <div {...prov.dragHandleProps}>&#10303;</div>
                       <div className='flex gap-2 justify-center items-center '>
-                        <input type='checkbox' className='w-4 h-4 cursor-pointer'/>
+                        <input onClick={(e)=>updateCompletedTask(val.docID,e)} type='checkbox' className={`w-4 h-4 cursor-pointer ${val.isComplete&""}`} defaultChecked={val.isComplete}/>
                         <label>{val.title}</label>
                       </div>
                       <div className='select-none'>{val.time}</div>

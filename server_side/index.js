@@ -131,14 +131,22 @@ app.post('/login', (req, res) => {
 //get on fire base(data+id)
 
 app.get('/data',middleWare,async(req,res)=>{
-   const q = req.query;
+   const {day} = req.query;
    
     const headerId = req.headers.authorization
     const id = headerId.split(' ')[1];
     const snapShot = await tasks.get();
-    // const ids = snapShot.docs.map((doc)=>doc.id);
-    const list = snapShot.docs.map((doc)=>doc.data());
-    const taskss = list.filter((val)=>val.id===id&&val.date===q.day);
+    
+    const list = snapShot.docs.map((doc)=>{
+      const data = doc.data();
+      const newData={
+        docID:doc.id,
+        ...data
+      };
+      return newData;
+    });
+
+    const taskss = list.filter((val)=>val.id===id&&val.date===day);
     
 
     res.send({"response":"Succes",data:taskss});
@@ -147,9 +155,6 @@ app.get('/data',middleWare,async(req,res)=>{
 //post on fierbase
 app.post('/data',async(req,res)=>{
     const data = req.body;
-    const currDay = new Date();
-    if(data.date==="")
-      data.date=`${currDay.getFullYear()}-${currDay.getMonth()}-${currDay.getDate()}`;
     if(data.time==="")
       data.time="Today";
     console.log(data);
@@ -157,7 +162,22 @@ app.post('/data',async(req,res)=>{
     res.send({msg:"Data added"});
 })
 
+app.patch('/data',middleWare,async(req,res)=>{
+    const {docID} = req.query;
+    
+    const taskRef = tasks.doc(docID);
+    const taskSnapshot = await taskRef.get();
+    //updateing the task to complete or not complete
+    const data=await taskSnapshot.data();
+    
+    await taskRef.update({isComplete:!data.isComplete});
+    //getting the response of new data
+    data.isComplete=!data.isComplete;
+    console.log(data)
 
+    res.send({"response":"Succes",data:{...data,docID}});
+    
+})
 
 app.get('/anyDay',async(req,res)=>{
     const days = ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
